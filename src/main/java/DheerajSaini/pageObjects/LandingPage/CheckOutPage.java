@@ -40,8 +40,7 @@ public class CheckOutPage extends AbstractComponent {
 
     public ConfirmPage clickSubmit(){
         submit.click();
-        ConfirmPage confirmPage= new ConfirmPage(driver);
-        return confirmPage;
+        return new ConfirmPage(driver);
     }
 
 }

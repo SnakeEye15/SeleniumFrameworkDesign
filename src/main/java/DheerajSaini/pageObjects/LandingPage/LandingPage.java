@@ -30,7 +30,12 @@ public class LandingPage extends AbstractComponent {
     @FindBy(id="login")
     WebElement submit;
 
+    @FindBy(css="div[aria-label='Incorrect email or password.']")
+    WebElement Errormessge;
+
     public ProductCatalogue loginApplication(String username, String password){
+        Email.clear();
+        passwordEle.clear();
         Email.sendKeys(username);
         passwordEle.sendKeys(password);
         submit.click();
@@ -42,9 +47,13 @@ public class LandingPage extends AbstractComponent {
         driver.get("https://rahulshettyacademy.com/client/#/auth/login");
     }
 
+    public String giveErrorMessage(){
+            waitForWebElementToAppear(Errormessge);
+            return Errormessge.getText();
+    }
 
 
-
+    //div[aria-label='Incorrect email or password.']
 
 
 }

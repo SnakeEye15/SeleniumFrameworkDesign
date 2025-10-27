@@ -1,6 +1,7 @@
 package DheerajSaini.AbstractComponents;
 
 import DheerajSaini.pageObjects.LandingPage.CartPage;
+import DheerajSaini.pageObjects.LandingPage.OrderPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,11 +22,21 @@ public class AbstractComponent {
 
     @FindBy(css="button[routerlink*='cart']")
     WebElement CartHeder;
+    //tr td:nth-child(3)
+    @FindBy(css=".btn.btn-custom[routerlink='/dashboard/myorders']")
+    WebElement OrderHeader;
 
     public void waitForElementToAppear(By findBy) {
         WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOfElementLocated(findBy));
     }
+
+    public void waitForWebElementToAppear(WebElement findBy) {
+        WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOf(findBy));
+    }
+
+
 
     public void waitForElementToDisappear(WebElement findBy){
         WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -39,8 +50,14 @@ public class AbstractComponent {
 
     public CartPage goToCart(){
         CartHeder.click();
-        CartPage cart=new CartPage(driver);
-        return cart;
+        return new CartPage(driver);
+
+    }
+
+    public OrderPage goToOrder(){
+        OrderHeader.click();
+        return new OrderPage(driver);
+
     }
 
 }

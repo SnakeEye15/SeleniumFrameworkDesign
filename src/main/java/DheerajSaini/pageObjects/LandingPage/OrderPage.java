@@ -7,9 +7,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ConfirmPage extends AbstractComponent {
+import java.util.List;
+
+public class OrderPage extends AbstractComponent {
+
     WebDriver driver;
-    public ConfirmPage(WebDriver driver) {
+    public OrderPage(WebDriver driver){
+        //for parent class webdriver assignations [AbstractComponent]
         super(driver);
         //To initialize the webdriver
         this.driver=driver;
@@ -17,16 +21,14 @@ public class ConfirmPage extends AbstractComponent {
         PageFactory.initElements(driver,this);
     }
 
-    By confirmMessage=By.cssSelector(".hero-primary");
+    @FindBy(css="tr td:nth-child(3)")
+    List<WebElement> Orders;
 
-    @FindBy(css=".hero-primary")
-    WebElement CompleteMessage;
+    public Boolean VerifyOrderDisplays(String productName){
 
-
-    public String verifyConfirmMessage(){
-        waitForElementToAppear(confirmMessage);
-        return CompleteMessage.getText();
+        return Orders.stream().allMatch(cart-> cart.getText().equalsIgnoreCase(productName));
     }
+
 
 
 }
