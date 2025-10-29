@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite parallel="methods" name="Failed suite [All Test Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" parallel="methods" name="Error Validations (failed)">
+    <classes>
+      <class name="DheerajSaini.test.ErrorValidationsTests">
+        <methods>
+          <include name="verifyWrongItem"/>
+          <include name="launchApplication"/>
+          <include name="tearDown"/>
+          <include name="VerifyError"/>
+        </methods>
+      </class> <!-- DheerajSaini.test.ErrorValidationsTests -->
+    </classes>
+  </test> <!-- Error Validations (failed) -->
+</suite> <!-- Failed suite [All Test Suite] -->

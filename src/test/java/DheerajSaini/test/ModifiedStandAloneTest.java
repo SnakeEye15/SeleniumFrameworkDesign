@@ -4,14 +4,15 @@ import DheerajSaini.TestComponents.BaseTest;
 import DheerajSaini.pageObjects.LandingPage.*;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.List;
 
 public class ModifiedStandAloneTest extends BaseTest {
     String productName="ZARA COAT 3";
-        @Test
-        public void firstTest() throws InterruptedException, IOException {
+        @Test (dataProvider = "getData",groups ={"Purchase"})
+        public void firstTest(String Email, String passowrd, String productName) throws InterruptedException, IOException {
 
         ProductCatalogue pdct=page.loginApplication("sainidheeraj913@gmail.com", "@Dksharmais1908");
         Thread.sleep(2000);
@@ -29,9 +30,15 @@ public class ModifiedStandAloneTest extends BaseTest {
 
     @Test(dependsOnMethods = {"firstTest"})
     public void OrderHistory() throws InterruptedException {
-        ProductCatalogue pdct= page.loginApplication("sainidheeraj913@gmail.com", "@Dksharmais1908");
+        ProductCatalogue pdct = page.loginApplication("sainidheeraj913@gmail.com", "@Dksharmais1908");
         Thread.sleep(2000);
-        OrderPage orderPage=pdct.goToOrder();
+        OrderPage orderPage = pdct.goToOrder();
         Assert.assertTrue(orderPage.VerifyOrderDisplays(productName));
-        }
+    }
+    
+    @DataProvider
+    public Object[][] getData(){
+            return new Object[][] {{"sainidheeraj913@gmail.com", "@Dksharmais1908","ZARA COAT 3"},{"hcldheerajoculs@gmail.com", "@Dksharmais190802","ADIDAS ORIGINAL"}};
+    }
+
 }
